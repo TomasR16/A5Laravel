@@ -17,5 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Maak route voor ContactController 
+Route::redirect('/', '/contacts');
+
+// Maak route voor ContactController 
+// Als user in zoekbalk contacts search gebruik ContactController
 Route::resource('contacts', 'App\Http\Controllers\ContactController');
+
+// Maak Route voor CompanyController 
+Route::resource('companies', 'App\Http\Controllers\CompanyController');

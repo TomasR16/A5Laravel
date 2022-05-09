@@ -1,5 +1,6 @@
+<!-- Verlenging van layout app.blade.php -->
 @extends('layouts.app')
-
+<!-- Begin content -->
 @section('content')
 <div class="row">
     <div class="col-sm-8 offset-sm-2">
@@ -25,7 +26,10 @@
                     <label for="last_name">Achternaam:</label>
                     <input type="text" class="form-control" name="last_name" />
                 </div>
-
+                <div class="form-group">
+                    <label for="company">Bedrijf</label>
+                    {!! Form::select('company_id', $companies, null, ['placeholder' => 'Kies een bedrijf...','class' => 'form-control']) !!}
+                </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="text" class="form-control" name="email" />
@@ -47,4 +51,5 @@
         </div>
     </div>
 </div>
+<!-- Einde content -->
 @endsection

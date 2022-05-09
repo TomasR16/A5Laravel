@@ -35,7 +35,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contacts.index') }}">Contacten</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('companies.index') }}">Bedrijven</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -47,7 +52,7 @@
         </nav>
 
         <main class="container">
-            <!-- HIER KOMT CONTENT -->
+            <!-- HIER KOMT CONTENT van andere Views -->
             @yield('content')
         </main>
     </div>

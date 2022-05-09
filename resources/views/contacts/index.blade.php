@@ -22,8 +22,9 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <td>ID</td>
+                    <td>Id</td>
                     <td>Naam</td>
+                    <td>Bedrijf</td>
                     <td>Email</td>
                     <td>Functie</td>
                     <td>Woonplaats</td>
@@ -38,6 +39,7 @@
                     <!-- Show contact information -->
                     <td>{{$contact->id}}</td>
                     <td>{{$contact->first_name}} {{$contact->last_name}}</td>
+                    <td>{{$contact->company->name}}</td>
                     <td>{{$contact->email}}</td>
                     <td>{{$contact->job_title}}</td>
                     <td>{{$contact->city}}</td>
