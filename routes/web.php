@@ -19,9 +19,13 @@ Route::get('/', function () {
 
 Route::redirect('/', '/contacts');
 
-// Maak route voor ContactController 
-// Als user in zoekbalk contacts search gebruik ContactController
-Route::resource('contacts', 'App\Http\Controllers\ContactController');
+Auth::routes();
 
-// Maak Route voor CompanyController 
-Route::resource('companies', 'App\Http\Controllers\CompanyController');
+Route::group(['middelware' => ['auth']], function () {
+    // Maak route voor ContactController 
+    // Als user in zoekbalk contacts search gebruik ContactController
+    Route::resource('contacts', 'App\Http\Controllers\ContactController');
+    // Maak Route voor CompanyController 
+    Route::resource('companies', 'App\Http\Controllers\CompanyController');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});

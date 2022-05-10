@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        //Toevoegen foreingId key aan contacts table
+        // Toevoegen foreingId key aan contacts table
         Schema::table('contacts', function (Blueprint $table) {
             $table->foreignId('company_id')->constrained();
         });
