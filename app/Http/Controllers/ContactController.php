@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -30,11 +31,18 @@ class ContactController extends Controller
     // Als je contacts.create aanroept in search
     public function create()
     {
-        // Pak alle namen van het Company object op alfabetische volgorde
-        // En pluck method voor het filteren van data uit array 
-        $companies = Company::orderby('name', 'desc')->pluck('name', 'id');
-        //Return View contacts.create.blade.php
-        return view('contacts.create', compact('companies'));
+        // Checken of user is ingelogd
+        if (Auth::user()) {
+            // Pak alle namen van het Company object op alfabetische volgorde
+            // En pluck method voor het filteren van data uit array 
+            $companies = Company::orderby('name', 'desc')->pluck('name', 'id');
+            //Return View contacts.create.blade.php
+            return view('contacts.create', compact('companies'));
+        }
+        // Ophalen alle contacten uit Contact Object
+        $contacts = Contact::all();
+        // Terug sturen naar contacts.index
+        return redirect()->route('contacts.index');
     }
 
     /**
@@ -82,9 +90,17 @@ class ContactController extends Controller
     // Als je contacts/2/edit aanroept in search
     public function edit(Contact $contact)
     {
-        // return view contacts.edit.blade.php met contact array
-        $companies = Company::pluck('name', 'id');
-        return view('contacts.edit', compact('contact', 'companies'));
+
+        if (Auth::user()) {
+            // Ophalen companies uit Company object
+            $companies = Company::pluck('name', 'id');
+
+            // return view contacts.edit.blade.php met contact array
+            return view('contacts.edit', compact('contact', 'companies'));
+        }
+
+        $contacts = Contact::all();
+        return redirect()->route('contacts.index');
     }
 
     /**

@@ -44,6 +44,7 @@
                     <td>{{$contact->job_title}}</td>
                     <td>{{$contact->city}}</td>
                     <td>{{$contact->country}}</td>
+                    @auth
                     <td>
                         <!-- Als op link klikt ga naar contacts edit page geef contact->id mee als argument -->
                         <a href="{{ route('contacts.edit',$contact->id)}}" class="btn btn-primary">Aanpassen</a>
@@ -56,6 +57,7 @@
                             <button class="btn btn-danger" type="submit">Verwijderen</button>
                         </form>
                     </td>
+                    @endauth
                 </tr>
                 @endforeach
             </tbody>
