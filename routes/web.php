@@ -28,5 +28,6 @@ Route::group(['middelware' => ['auth']], function () {
     Route::resource('contacts', 'App\Http\Controllers\ContactController');
     // Maak Route voor CompanyController 
     Route::resource('companies', 'App\Http\Controllers\CompanyController');
+    // require HomeController
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });

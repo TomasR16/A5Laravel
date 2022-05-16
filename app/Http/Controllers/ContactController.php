@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
+    // Must be logged in to see contacts
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['login', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
