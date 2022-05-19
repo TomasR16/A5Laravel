@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
-    // Must be logged in to see contacts
     public function __construct()
     {
+        // Must be logged in to see contacts
         $this->middleware('auth', ['except' => ['login', 'show']]);
     }
     /**
@@ -20,10 +20,16 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     // Wijst naar index.blade.php
-    public function index()
+    public function index(Request $request)
     {
-        //Get all contacts
-        $contacts = Contact::all();
+        $keyword = $request->keyword;
+        if (isset($keyword)) {
+            // Roep Contact object static method aan en zoek voor $keyword
+            $contacts = Contact::contactSearch($keyword);
+        } else {
+            // Get all contacts from Object
+            $contacts = Contact::all();
+        }
         //Send contacts to view contacts.index.blade.php
         return view('contacts.index', compact('contacts'));
     }

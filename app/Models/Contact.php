@@ -19,8 +19,10 @@ class Contact extends Model
         // Toevoegen van relatie 
         return $this->belongsTo('App\Models\Company', 'company_id');
     }
-
-    public static function contactSearch($name) {
-        return Contact::where("first_name", 'LIKE', "%$name%")->orWhere("last_name", 'LIKE', "%$name%")->orWhere("email", "LIKE", "%$name%")->get();
+    // contactSearch method
+    public static function contactSearch($name)
+    {
+        // Kijken welke first_name en last_name $name hebben 
+        return Contact::where("first_name", 'LIKE', "%$name%")->orWhere("last_name", 'LIKE', "%$name%")->get();
     }
 }
