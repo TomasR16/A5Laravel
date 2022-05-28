@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
+    // Contructor
     public function __construct()
     {
         // Must be logged in to see contacts
@@ -22,12 +23,14 @@ class ContactController extends Controller
     // Wijst naar index.blade.php
     public function index(Request $request)
     {
+        // ophalen $keyword uit Request object
         $keyword = $request->keyword;
+        // Als $keyword gevuld is
         if (isset($keyword)) {
             // Roep Contact object static method aan en zoek voor $keyword
             $contacts = Contact::contactSearch($keyword);
         } else {
-            // Get all contacts from Object
+            // Haal alle Contacten
             $contacts = Contact::all();
         }
         //Send contacts to view contacts.index.blade.php

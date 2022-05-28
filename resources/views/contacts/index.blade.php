@@ -16,7 +16,7 @@
     <a style="margin: 19px;" href="{{ route('contacts.create')}}" class="btn btn-primary">Contact toevoegen</a>
 </div>
 
-<!-- TEST CODE -->
+<!-- Begin Search -->
 <div class="row">
     {!! Form::open(['method'=>'GET','url'=>'/contacts/','class'=>'navbar-form navbar-left','role'=>'search']) !!}
     <div class="input-group custom-search-form">
@@ -29,7 +29,7 @@
     </div>
     {!! Form::close() !!}
 </div>
-<!-- END TEST CODE -->
+<!-- END Search -->
 
 <div class="row">
     <div class="col-sm-12">

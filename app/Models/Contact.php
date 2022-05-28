@@ -23,6 +23,6 @@ class Contact extends Model
     public static function contactSearch($name)
     {
         // Kijken welke first_name en last_name $name hebben 
-        return Contact::where("first_name", 'LIKE', "%$name%")->orWhere("last_name", 'LIKE', "%$name%")->get();
+        return Contact::where("first_name", 'LIKE', "%$name%")->orWhere("last_name", 'LIKE', "%$name%")->orWhere("city", "LIKE", "%$name%")->get();
     }
 }
