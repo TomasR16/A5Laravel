@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
-    // Contructor
+    // Contructor method 
     public function __construct()
     {
-        // Must be logged in to see contacts
+        // Must be logged in to see contacts!
         $this->middleware('auth', ['except' => ['login', 'show']]);
     }
     /**

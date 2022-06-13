@@ -4,23 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
+    // Contructor method
+    public function __construct()
+    {
+        // Must be logged in to see companies!
+        $this->middleware('auth', ['except' => ['login', 'show']]);
+    }
     // Methods voor Zoekopdracht
     public function index()
     {
-        // Ophalen alle bedrijven uit model Company object
-        $companies = Company::all();
-        // Geef view companies.index met companies array
-        return view('companies.index', compact('companies'));
+        if (Auth::user()) {
+            // Ophalen alle bedrijven uit model Company object
+            $companies = Company::all();
+            // Geef view companies.index met companies array
+            return view('companies.index', compact('companies'));
+        }
     }
 
     // Voor maken van nieuw bedrijf
     public function create()
     {
-        // Geef view companies.create voor het toevoegen van een nieuw bedrijf
-        return view('companies.create');
+        if (Auth::user()) {
+            // return view companies.create
+            return view('companies.create');
+        } else {
+            // ophalen companies
+            $companies = Company::all();
+            // Stuur naar index
+            return view('companies.index', compact('companies'));
+        }
     }
 
     // voor opslaan van nieuw bedrijf 
@@ -45,7 +61,16 @@ class CompanyController extends Controller
     // Editen van bepaalde company
     public function edit(Company $company)
     {
-        return view('companies.edit', compact('company'));
+        // Check if user logged in
+        if (Auth::user()) {
+            // return view companies.edit
+            return view('companies.edit', compact('company'));
+        } else {
+            // ophalen companies
+            $companies = Company::all();
+            // Stuur naar view companies.index
+            return view('companies.index', compact('companies'));
+        }
     }
 
     // Updaten van een bedrijf krijgt waardes binnen met Request en Company 
@@ -59,7 +84,7 @@ class CompanyController extends Controller
         // Updaten alles van company object
         $company->update($request->all());
         // Terug naar companies.index met message
-        return redirect()->route('/companies')->with('succes', 'bedrijf is aangepast');
+        return redirect()->route('companies.index')->with('succes', 'bedrijf is aangepast');
     }
 
     // Verwijderen van data

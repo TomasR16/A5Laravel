@@ -18,7 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::redirect('/', '/contacts');
+// Route::redirect('/', '/contacts');
+// Route::redirect('/', '/companies');
 
 Auth::routes();
 
