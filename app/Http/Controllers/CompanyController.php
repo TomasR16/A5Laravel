@@ -15,14 +15,20 @@ class CompanyController extends Controller
         $this->middleware('auth', ['except' => ['login', 'show']]);
     }
     // Methods voor Zoekopdracht
-    public function index()
+    public function index(Request $request)
     {
-        if (Auth::user()) {
-            // Ophalen alle bedrijven uit model Company object
+        // ophalen $keyword uit Request object
+        $keyword = $request->keyword;
+        // Als $keyword gevuld is
+        if (isset($keyword)) {
+            // Roep Contact object static method aan en zoek voor $keyword
+            $companies = Company::companySearch($keyword);
+        } else {
+            // Haal alle Contacten
             $companies = Company::all();
-            // Geef view companies.index met companies array
-            return view('companies.index', compact('companies'));
         }
+        //Send contacts to view contacts.index.blade.php
+        return view('companies.index', compact('companies'));
     }
 
     // Voor maken van nieuw bedrijf

@@ -12,4 +12,11 @@ class Company extends Model
     protected $fillable = [
         'name'
     ];
+
+    // company search method
+    public static function companySearch($name)
+    {
+        // Kijken welke name $name in companies 
+        return Company::where("name", 'LIKE', "%$name%")->get();
+    }
 }

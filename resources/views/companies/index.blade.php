@@ -16,6 +16,21 @@
     <a style="margin: 19px;" href="{{ route('companies.create')}}" class="btn btn-primary">Bedrijf toevoegen</a>
 </div>
 
+<!-- Begin Search -->
+<div class="row">
+    {!! Form::open(['method'=>'GET','url'=>'/companies/','class'=>'navbar-form navbar-left','role'=>'search']) !!}
+    <div class="input-group custom-search-form">
+        <input type="text" class="form-control" name="keyword" placeholder="Zoek...">
+        <span class="input-group-btn">
+            <button class="btn btn-default-sm" type="submit">
+                <i class="fa fa-search"><span class="glyphicon glyphicon-search" />
+            </button>
+        </span>
+    </div>
+    {!! Form::close() !!}
+</div>
+<!-- END Search -->
+
 <div class="row">
     <div class="col-sm-12">
         <h1 class="display-3">Bedrijven</h1>
